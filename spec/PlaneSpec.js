@@ -6,7 +6,7 @@ describe('Plane Unit Test:', function(){
 
     beforeEach(function(){
         plane = new Plane();
-        airport = jasmine.createSpyObj('airport', ['clearForLanding']);
+        airport = jasmine.createSpyObj('airport', ['clearForLanding','clearForTakeOff']);
     });
 
     it('plane can land', function(){
@@ -17,20 +17,10 @@ describe('Plane Unit Test:', function(){
         plane.land(airport);
         expect(airport.clearForLanding).toHaveBeenCalledWith(plane);
     });
+
+    it('plane can takeoff from an airport', function(){
+        plane.land(airport);
+        plane.takeoff();
+        expect(airport.clearForTakeOff).toHaveBeenCalled();
+    });
 });
-
-
-// describe('Feature Test:', function(){
-//     var plane;
-//     var airport;
-  
-//     beforeEach(function(){
-//       plane = new Plane();
-//       airport = new Airport();
-//     });
-  
-//     it('planes can be instructed to land at an airport', function(){
-//       plane.land(airport);
-//       expect(airport.planes()).toContain(plane);
-//     });
-//   });
